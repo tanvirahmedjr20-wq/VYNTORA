@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VYNTORA Admin</title>
+<style>
+body{font-family:Arial;background:#f4f6fa;padding:20px}
+main{max-width:400px;margin:auto;background:white;padding:20px;border-radius:12px}
+input,button{width:100%;box-sizing:border-box;padding:12px;margin:8px 0}
+button{background:#101828;color:white;border:0;border-radius:8px}
+</style>
+</head>
+<body>
+<main>
+<h2>VYNTORA Admin</h2>
+<h3>পণ্য যোগ করুন</h3>
+<input id="name" placeholder="পণ্যের নাম">
+<input id="price" type="number" placeholder="দাম (৳)">
+<input id="code" placeholder="Product Code">
+<button onclick="add()">পণ্য যোগ করুন</button>
+<p id="msg"></p>
+</main>
+<script>
+function add(){
+const name=document.getElementById('name').value.trim();
+const price=Number(document.getElementById('price').value);
+const code=document.getElementById('code').value.trim();
+if(!name||!code||price<=0){
+document.getElementById('msg').textContent='সঠিক তথ্য দিন';
+return;
+}
+let p=JSON.parse(localStorage.getItem('vyntoraProducts')||'[]');
+p.push({name,price,code});
+localStorage.setItem('vyntoraProducts',JSON.stringify(p));
+document.getElementById('msg').textContent='পণ্য সংরক্ষিত হয়েছে!';
+}
+</script>
+</body>
+</html>
